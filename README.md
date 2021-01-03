@@ -10,10 +10,8 @@ I have a belkin Wemo insight smart plug, that I monitor the power usage of. When
 files | explanation
 --- | ---
 flask_prog.py | python webserver that calls open and close garage door
-Dockerfile | makes the container that closes and opens garage door
-docker-compose.override.yml | extends traefik_duckdns docker-compose to add this project
-rules/garage.toml | traefik config file to add webserver & expose it securely to internet
-pymyq-wrapper.py | example warpper for [pymyq](https://github.com/arraylabs/pymyq) that is controlled via exec
+Dockerfile | makes the container that deals with the kotatsu
+docker-compose.override.yml | docker-compose to start this project with right network settings
 pyproject.toml | [poetry](https://python-poetry.org/) project file
 poetry.lock | [poetry](https://python-poetry.org/) lock file
 
