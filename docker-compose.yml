@@ -1,0 +1,16 @@
+
+version: '2'
+
+services:
+  light_service:
+    build: .
+    image: light:1
+    restart: always
+    network_mode: "host"
+    volumes:
+    - .:/state/
+
+networks:
+ default:
+  external:
+   name: "none"
