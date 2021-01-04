@@ -5,7 +5,7 @@ env = Environment()
 env.start()
 env.discover(seconds=10)
 
-state_file = '/data/state.txt'
+state_file = '/state/state.txt'
 
 def IsOn(wemo_switch):
   return (wemo_switch.get_state(True) != 0)
