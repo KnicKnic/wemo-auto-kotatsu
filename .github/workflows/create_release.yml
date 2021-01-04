@@ -8,7 +8,8 @@ on:
 env:
   SECRETS_ARE_AVAILABLE: ${{ secrets.DOCKERHUB_USERNAME }}
   BUILD_REPOSITORY: knicknic/wemo-auto-kotatsu
-  BUILD_PLATFORMS: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6 # all platforms from available platforms that are also available from debian:latest
+  BUILD_PLATFORMS: linux/amd64,linux/arm/v6 # find a subset that will easily build
+  # BUILD_PLATFORMS: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6 # all platforms from available platforms that are also available from debian:latest
 
 jobs:
   build_all_arch:
