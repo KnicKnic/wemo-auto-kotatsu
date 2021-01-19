@@ -1,11 +1,39 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
+
 import datetime
 import os
+import sys
 import time
 import pywemo
 
 debug = os.getenv('debug') is not None
 state_file = '/state/state.txt'
+
+options = [arg.lstrip('-').split('=', 1) for arg in sys.argv[1:]]
+
+def makeHourMinRange(x):
+    start,end = x.split('-')
+    start_hour,start_min = (int(x) for x in start.split(':'))
+    end_hour,end_min = (int(x) for x in end.split(':'))
+    return [[start_hour, start_min], [end_hour,end_min]]
+
+on_times = [makeHourMinRange(opt[1]) for opt in options if opt[0] == 'on-time']
+
+# fix up spanning across midnight
+for i in range(len(on_times)):
+    if on_times[i][0] >= on_times[i][1]:
+        on_times.append([[0,0], on_times[i][1]])
+        on_times[i][1] = [24,0]
+
+print("on times", on_times)
+
+def isOnTime():
+    for x in on_times:
+        currentTimeFull = time.localtime()
+        currentTime = [currentTimeFull.tm_hour, currentTimeFull.tm_min]
+        if x[0] <= currentTime and x[1] >= currentTime:
+            return True
+    return False
 
 def IsOn(wemo_switch):
     return (wemo_switch.get_state(True) != 0)
@@ -56,11 +84,17 @@ twentyMins = datetime.timedelta(minutes=20)
 #twentyMins = datetime.timedelta(seconds=20)
 
 #loop for an hour
-second_sleep =5
+second_sleep = 5
 for x in range(0, 3600, second_sleep):
     EnsureOn(lightDetector)
     
     time.sleep(second_sleep)
+
+    if isOnTime():
+        Log("ensuring on due to ontime")
+        EnsureOn(heater)
+        continue
+
     twentyMinsFuture = datetime.datetime.now() + twentyMins
 
     drawing_power = DrawingPower(lightDetector)
