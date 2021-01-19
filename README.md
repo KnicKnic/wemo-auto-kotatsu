@@ -10,6 +10,8 @@ I have a belkin Wemo insight smart plug, that I monitor the power usage of. Scen
 * When the power usage goes higher than a specific amount I know that the light is turned on, I turn on another adapter on the other side of the room.
 * When the light turns off, I turn off the other side. 
 * I let the other side of the room be on for up to 15 minutes, to facilitate prewarming the kotatsu.
+* added ability to specify multiple always on times
+    * `--on-time=18:45-21:00 --on-time=23:40-2:00`
 
 ## Files explained
 files | explanation
