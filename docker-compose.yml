@@ -3,10 +3,14 @@ version: '2'
 
 services:
   light_service:
-    build: .
-    image: light:1
+#    build: .
+    image: knicknic/wemo-auto-kotatsu:v1.0.0@sha256:5d0338544f011d6ae97bb0cc6a4b041234a243be5ca0677fa4bd112513ecc299
     restart: always
     network_mode: "host"
+    command: ["--on-time=18:45-21:00"]
+    environment:
+    - TZ=America/Los_Angeles
+#    - debug=1
     volumes:
     - .:/state/
 
