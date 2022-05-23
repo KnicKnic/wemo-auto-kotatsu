@@ -5,7 +5,7 @@ description = ""
 authors = ["Your Name <you@example.com>"]
 
 [tool.poetry.dependencies]
-pywemo  = "^0.5.6"
+pywemo  = "^0.8.1"
 python = ">=3.7,<4.0"
 
 [tool.poetry.dev-dependencies]
